@@ -1,0 +1,14 @@
+<h1>HOME</h1>
+
+<% @users.each do |user| %>
+    </br>
+    <div >
+        <%= user.first_name %>
+    </div>
+    <div >
+        <%= user.last_name %>
+    </div>
+    <div >
+    <%= user.email %>
+    </div>
+<% end %>
