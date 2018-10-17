@@ -15,4 +15,6 @@
 //= require turbolinks
 //= require_tree .
 //= require jquery
-//= require materialize-sprockets
+//= require popper
+//= require bootstrap
+//= require material

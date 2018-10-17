@@ -6,6 +6,7 @@ ruby '2.5.1'
 gem 'devise'
 gem 'omniauth-google-oauth2'
 gem 'figaro'
+gem 'jquery'
 gem 'bootstrap',     '4.1.1'
 gem 'material-sass', '4.1.1'
 
