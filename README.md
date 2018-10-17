@@ -24,3 +24,7 @@ Things you may want to cover:
 * ...
 
 Testing 
+
+Some Great projects:
+
+- Material-sass   https://github.com/mkhairi/material-sass
