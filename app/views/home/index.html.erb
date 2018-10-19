@@ -5,7 +5,7 @@
   <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
     <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Home</a>
     <a class="nav-link" id="v-pills-add-new-user-tab" data-toggle="pill" href="#v-pills-add-new-user" role="tab" aria-controls="v-pills-add-new-user" aria-selected="false">Add A New User</a>
-    <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Messages</a>
+    <a class="nav-link" id="v-pills-add-imap-provider-tab" data-toggle="pill" href="#v-pills-add-imap-provider" role="tab" aria-controls="v-pills-add-imap-provider" aria-selected="false">Add A New Provider</a>
     <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</a>
   </div>
 </div>
@@ -29,6 +29,27 @@
           </tr>
         <% end %>
       </table>
+
+      <h3>Providers</h3>
+
+      <table>
+        <tr>
+          <th>Name &nbsp; &nbsp; &nbsp;</th>
+          <th>Server</th>
+          <th>Port</th>
+          <th>SSL</th>
+        </tr>
+        <% @imap_providers.each do |provider| %>
+          <tr>
+            <td><%= provider.name %></td>
+            <td><%= provider.server %></td>
+            <td><%= provider.port %></td>
+            <td><%= provider.ssl %></td>
+          </tr>
+        <% end %>
+      </table>
+
+
     </div>
 <%# Add New User%>
   <div class="tab-pane fade" id="v-pills-add-new-user" role="tabpanel" aria-labelledby="v-pills-add-new-user-tab">
@@ -62,7 +83,35 @@
     <% end %>
   </div>
 <%# Spare Page%>
-  <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+  <div class="tab-pane fade" id="v-pills-add-imap-provider" role="tabpanel" aria-labelledby="v-pills-add-imap-provider-tab">
+  <h3>Create a new provider here...</h3>
+    <%= form_for(ImapProvider.new, :html => {:class => 'form_group'}) do |form| %>
+      <div class='row'>
+        <div class='col-2'>
+          <div class='form-group'>
+            <%= form.text_field :name, class:'form-control', placeholder: 'i.e. Google' %>
+          </div>
+        </div>
+        <div class='col-2'>
+          <div class='form-group'>
+            <%= form.text_field :server, class:'form-control', placeholder: 'i.e. imap.gmail.com' %>
+          </div>
+        </div>
+      </div>
+      <div class='row'>
+        <div class='col-2'>
+          <div class='form-group'>
+            <%= form.text_field :port, class:'form-control', placeholder: 'i.e. 993' %>
+          </div>
+        </div>
+      </div>
+      <div class='form-check'>
+        <%= form.check_box :ssl, class:'form-check-input', id:'ssl'%>
+        <label for="can_login">Use SSL?</label>
+      </div>
+      <br>
+      <%= form.submit "Submit", class:'btn btn-primary' %>
+    <% end %>
   </div>
 <%# Spare Page%>
   <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
