@@ -2,6 +2,7 @@ class HomeController < ApplicationController
 
   def index
       @users = User.all
+      @imap_providers = ImapProvider.all
   end
 
   def new_user
@@ -17,5 +18,4 @@ class HomeController < ApplicationController
   def new_user_params
     params.require(:new_user).permit(:first_name, :last_name, :email)
   end
-    
 end
