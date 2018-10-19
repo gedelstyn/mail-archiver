@@ -1,4 +1,5 @@
 <h1>HOME</h1>
+
 <div class="row">
 <div class="col-2">
   <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
@@ -8,6 +9,8 @@
     <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</a>
   </div>
 </div>
+
+
 <div class="col-10">
   <div class="tab-content" id="v-pills-tabContent">
     <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
@@ -27,23 +30,24 @@
 
 
     <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-      <form>
-        <div class="form-group">
-          <label for="first_name">First Name</label>
-          <input type="text" class="form-control" id="first_name" aria-describedby="nameHelp" placeholder="first name">
-          <small id="nameHelp" class="form-text text-muted">Enter first name.</small>
-        </div>
-        <div class="form-group">
-          <label for="last_name">Last Name</label>
-          <input type="text" class="form-control" id="last_name" placeholder="last name">
-        </div>
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
-          <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form> 
+
+
+    <%= form_for(User.new, :html => {:class => 'form_group'}) do |form| %>
+      <div class='form-group'>
+        <%= form.text_field :first_name, class:'form-control', placeholder: 'first name' %>
+      </div>
+
+      <div class='form-group'>
+        <%= form.text_field :last_name, class:'form-control', placeholder: 'last name' %>
+      </div>
+
+      <div class='form-group'>
+      <%= form.text_field :email, class:'form-control', placeholder: 'email' %>
+      </div>
+
+      <%= form.submit "Submit", class:'btn btn-primary' %>
+    <% end %>
+   
     
     </div>
       <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">...</div>
@@ -51,3 +55,4 @@
     </div>
   </div>
 </div>
+
