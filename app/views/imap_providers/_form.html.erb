@@ -1,0 +1,17 @@
+<%= form_with(model: imap_provider, local: true) do |form| %>
+  <% if imap_provider.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(imap_provider.errors.count, "error") %> prohibited this imap_provider from being saved:</h2>
+
+      <ul>
+      <% imap_provider.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

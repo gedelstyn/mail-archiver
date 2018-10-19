@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Imap Providers</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @imap_providers.each do |imap_provider| %>
+      <tr>
+        <td><%= link_to 'Show', imap_provider %></td>
+        <td><%= link_to 'Edit', edit_imap_provider_path(imap_provider) %></td>
+        <td><%= link_to 'Destroy', imap_provider, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Imap Provider', new_imap_provider_path %>
