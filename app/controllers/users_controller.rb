@@ -27,7 +27,6 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     @user.password = SecureRandom.hex(50)
-    @user.uid = @user.email
 
     respond_to do |format|
       if @user.save
