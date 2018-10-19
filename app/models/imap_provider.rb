@@ -1,0 +1,3 @@
+class ImapProvider < ApplicationRecord
+
+end
