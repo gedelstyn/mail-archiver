@@ -7,7 +7,7 @@ gem 'devise'
 gem 'omniauth-google-oauth2'
 gem 'figaro'
 gem 'jquery-rails'
-gem 'bootstrap',     '4.1.1'
+gem 'bootstrap',     '4.1.2'
 gem 'material-sass', '4.1.1'
 
 
