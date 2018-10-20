@@ -3,6 +3,8 @@ class HomeController < ApplicationController
   def index
       @users = User.all
       @imap_providers = ImapProvider.all
+      @imap_backup_version = Imap::Backup::VERSION
+
   end
 
   def new_user
