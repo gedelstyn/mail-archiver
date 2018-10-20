@@ -23,6 +23,15 @@ Things you may want to cover:
 
 * ...
 
+# Imap-Backup Library
+
+* - Files
+
+        - lib/imap/configuration/store.rb
+            This file handles storing the config file
+
+
+
 Testing 
 
 # Testing Again
