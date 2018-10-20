@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :imap_providers
   devise_for :user, controllers: {omniauth_callbacks: "omniauth_callbacks"}
   resources :users
+  resources :backup
   root 'home#index'
   get 'users/new'
   get 'users/index'
