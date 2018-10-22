@@ -32,8 +32,12 @@ module Imap::Backup
       FileUtils.chmod 0o600, pathname
     end
 
-    def accounts
+    def accounts      # Imap::Backup::Configuration::Setup.new.run
+      puts "this is running in store.rb, accounts method"
+      puts ""
+      puts ""
       data[:accounts]
+          
     end
 
     def modified?
@@ -51,17 +55,44 @@ module Imap::Backup
     private
 
     def data
+      # return @data if @data
+      # if File.exist?(pathname)
+      #   Utils.check_permissions pathname, 0o600
+      #   contents = File.read(pathname)
+      #   @data = JSON.parse(contents, symbolize_names: true)
+      # else
+      #   @data = {accounts: []}
+      # end
+      # @data[:debug] = false unless @data.include?(:debug)
+      # @data[:debug] = false unless [true, false].include?(@data[:debug])
+      # @data
+
+
+      @data = {:accounts=>[], :debug=>true}
+      User.all.each{ |user| 
+        if user.is_backup == true
+          @data[:accounts].push(
+            {
+              :username=>user.email, 
+              :password=>user.imap_password, 
+              :server=>ImapProviderImapProvider.find(user.provider).server, 
+              :local_path=>"/Users/guy/.imap-backup/guys-test-folder", 
+              :folders=>[], 
+              :connection_opsions=>{
+                :ssl=>{:verify_mode=>0}, 
+                :port=>ImapProviderImapProvider.find(user.provider).port
+              }
+            }
+          )
+        end
+      }
+      
       return @data if @data
-      if File.exist?(pathname)
-        Utils.check_permissions pathname, 0o600
-        contents = File.read(pathname)
-        @data = JSON.parse(contents, symbolize_names: true)
-      else
-        @data = {accounts: []}
-      end
-      @data[:debug] = false unless @data.include?(:debug)
-      @data[:debug] = false unless [true, false].include?(@data[:debug])
-      @data
+
+
+
+
+
     end
 
     def remove_modified_flags
