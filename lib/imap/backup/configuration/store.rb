@@ -75,12 +75,12 @@ module Imap::Backup
             {
               :username=>user.email, 
               :password=>user.imap_password, 
-              :server=>ImapProviderImapProvider.find(user.provider).server, 
+              :server=>ImapProvider.find(user.provider).server, 
               :local_path=>"/Users/guy/.imap-backup/guys-test-folder", 
               :folders=>[], 
               :connection_opsions=>{
                 :ssl=>{:verify_mode=>0}, 
-                :port=>ImapProviderImapProvider.find(user.provider).port
+                :port=>ImapProvider.find(user.provider).port
               }
             }
           )
