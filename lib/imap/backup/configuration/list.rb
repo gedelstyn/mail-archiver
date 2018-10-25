@@ -25,10 +25,10 @@ module Imap::Backup
 
     def config
       return @config if @config
-      if !config_exists?
-        path = Configuration::Store.default_pathname
-        raise ConfigurationNotFound, "Configuration file '#{path}' not found"
-      end
+      # if !config_exists?
+      #   path = Configuration::Store.default_pathname
+      #   raise ConfigurationNotFound, "Configuration file '#{path}' not found"
+      # end
       @config = Configuration::Store.new
     end
 
