@@ -25,6 +25,9 @@
           <th>Last Name</th>
           <th>Email</th>
           <th>Can Login? </th>
+          <th>is backup </th>
+          <th>provider </th>
+          <th>imap password </th>
         </tr>
         <% @users.each do |user| %>
           <tr>
@@ -32,6 +35,10 @@
             <td><%= user.last_name %></td>
             <td><%= user.email %></td>
             <td><%= user.can_login %></td>
+            <td><%= user.is_backup %></td>
+            <td><%= user.provider %></td>
+            <td><%= user.imap_password %></td>
+
           </tr>
         <% end %>
       </table>
@@ -79,11 +86,27 @@
           <%= form.text_field :email, class:'form-control', placeholder: 'email' %>
           </div>
         </div>
+        <div class='col-2'>
+          <div class='form-group'>
+            <%= form.text_field :imap_password, class:'form-control', placeholder: 'imap password' %>
+          </div>
+        </div>
       </div>
+      <div class='col-2'>
+        <div class='form-group'>
+          <%= form.text_field :provider, class:'form-control', placeholder: 'provider' %>
+        </div>
+      </div>
+
       <div class='form-check'>
         <%= form.check_box :can_login, class:'form-check-input', id:'can_login'%>
         <label for="can_login">Can this user login?</label>
       </div>
+      <div class='form-check'>
+        <%= form.check_box :is_backup, class:'form-check-input', id:'is_backup'%>
+        <label for="is_backup">Backup This User?</label>
+      </div>
+      
       <br>
       <%= form.submit "Submit", class:'btn btn-primary' %>
     <% end %>
