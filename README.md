@@ -30,6 +30,35 @@ Things you may want to cover:
         - lib/imap/configuration/store.rb
             This file handles storing the config file
 
+        - lib/imap/backup/account/connection.b
+            This file hadles the individual conection - important one
+
+        - list.rb
+            
+
+        - lib/imap-backup
+
+
+To run a backup from confg.json
+
+options = {command: "backup"}
+begin
+  configuration = Imap::Backup::Configuration::List.new(options[:accounts])
+rescue Imap::Backup::ConfigurationNotFound
+  Imap::Backup::Configuration::Setup.new.run
+  exit
+end
+configuration.setup_logging
+  configuration.each_connection do |connection|
+    connection.run_backup
+  end
+
+
+
+
+
+
+
 
 
 Testing 
