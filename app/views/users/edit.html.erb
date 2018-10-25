@@ -1,6 +1,48 @@
 <h1>Editing User</h1>
 
-<%= render 'form', user: @user %>
+    <%= form_for(@user, :html => {:class => 'form_group'}) do |form| %>
+      <div class='row'>
+        <div class='col-2'>
+          <div class='form-group'>
+            <%= form.text_field :first_name, class:'form-control', placeholder: 'first name' %>
+          </div>
+        </div>
+        <div class='col-2'>
+          <div class='form-group'>
+            <%= form.text_field :last_name, class:'form-control', placeholder: 'last name' %>
+          </div>
+        </div>
+      </div>
+      <div class='row'>
+        <div class='col-2'>
+          <div class='form-group'>
+          <%= form.text_field :email, class:'form-control', placeholder: 'email' %>
+          </div>
+        </div>
+        <div class='col-2'>
+          <div class='form-group'>
+            <%= form.text_field :imap_password, class:'form-control', placeholder: 'imap password' %>
+          </div>
+        </div>
+      </div>
+      <div class='col-2'>
+        <div class='form-group'>
+          <%= form.text_field :provider, class:'form-control', placeholder: 'provider' %>
+        </div>
+      </div>
 
-<%= link_to 'Show', @user %> |
-<%= link_to 'Back', users_path %>
+      <div class='form-check'>
+        <%= form.check_box :can_login, class:'form-check-input', id:'can_login'%>
+        <label for="can_login">Can this user login?</label>
+      </div>
+      <div class='form-check'>
+        <%= form.check_box :is_backup, class:'form-check-input', id:'is_backup'%>
+        <label for="is_backup">Backup This User?</label>
+      </div>
+      
+      <br>
+      <%= form.submit "Submit", class:'btn btn-primary' %>
+    <% end %>
+
+
+<%= link_to 'Back', root_path %>
