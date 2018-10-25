@@ -9,6 +9,8 @@ module Imap::Backup
     attr_reader :password
     attr_reader :username
 
+### Original - 
+
     def initialize(options)
       @username, @password = options[:username], options[:password]
       @local_path = options[:local_path]
@@ -18,6 +20,19 @@ module Imap::Backup
       @folders = nil
       create_account_folder
     end
+
+### Modified - 
+
+    # def initialize(username, password, local_path, backup_folders, server, connection_options)
+    #   @username = username
+    #   @password = password
+    #   @local_path = local_path
+    #   @backup_folders = folders
+    #   @server = server
+    #   @connection_options = connection_options || {}
+    #   @folders = nil
+    #   create_account_folder
+    # end
 
     def folders
       @folders ||=
