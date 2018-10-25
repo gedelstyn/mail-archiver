@@ -38,6 +38,8 @@
             <td><%= user.is_backup %></td>
             <td><%= user.provider %></td>
             <td><%= user.imap_password %></td>
+            <td><%= link_to 'Edit', edit_user_path(user) %></td>
+
 
           </tr>
         <% end %>
@@ -61,9 +63,12 @@
           </tr>
         <% end %>
       </table>
-
-
     </div>
+
+
+
+
+
 <%# Add New User%>
   <div class="tab-pane fade" id="v-pills-add-new-user" role="tabpanel" aria-labelledby="v-pills-add-new-user-tab">
   <h3>Create a new user here...</h3>
@@ -111,7 +116,10 @@
       <%= form.submit "Submit", class:'btn btn-primary' %>
     <% end %>
   </div>
-<%# Spare Page%>
+
+
+
+<%# Add Imap Provider%>
   <div class="tab-pane fade" id="v-pills-add-imap-provider" role="tabpanel" aria-labelledby="v-pills-add-imap-provider-tab">
   <h3>Create a new provider here...</h3>
     <%= form_for(ImapProvider.new, :html => {:class => 'form_group'}) do |form| %>
@@ -144,7 +152,9 @@
   </div>
 <%# Spare Page%>
   <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
-  <p>You are running module imap-backup version <%= @imap_backup_version %></p>
+    <p>You are running module imap-backup version <%= @imap_backup_version %></p>
+    <%= link_to 'Start Manual Backup!', start_backup_path, method: :post %>
+
   </div>
 </div>
 
