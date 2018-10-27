@@ -27,7 +27,6 @@
           <th>Can Login? </th>
           <th>is backup </th>
           <th>provider </th>
-          <th>imap password </th>
         </tr>
         <% @users.each do |user| %>
           <tr>
@@ -37,7 +36,6 @@
             <td><%= user.can_login %></td>
             <td><%= user.is_backup %></td>
             <td><%= user.provider %></td>
-            <td><%= user.imap_password %></td>
             <td><%= link_to 'Edit', edit_user_path(user) %></td>
 
 
@@ -97,11 +95,28 @@
           </div>
         </div>
       </div>
-      <div class='col-2'>
-        <div class='form-group'>
-          <%= form.text_field :provider, class:'form-control', placeholder: 'provider' %>
+
+
+
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Dropdown button
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="#">Something else here</a>
         </div>
       </div>
+
+
+        <div class='dropdown'>
+          <%= form.collection_select(:provider, ImapProvider.all, class:'btn btn-secondary dropdown-toggle', type:'button', id:'dropdownMenuButton', data-toggle:'dropdown', aria-haspopup:'true' aria-expanded:'false') %>
+        </div>
+
+
+
+
 
       <div class='form-check'>
         <%= form.check_box :can_login, class:'form-check-input', id:'can_login'%>
