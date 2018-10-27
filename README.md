@@ -5,6 +5,8 @@ TODO
 Integrate OAuth2 for domain wide delegaton
 https://developers.google.com/gmail/imap/xoauth2-protocol
 
+working on dropdown
+
 # Imap-Backup Library
 
 * - Files
