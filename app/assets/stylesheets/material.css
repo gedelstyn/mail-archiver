@@ -75,6 +75,7 @@ section {
   display: block;
 }
 
+
 body {
   text-align: left;
   text-align: start;
@@ -5824,6 +5825,26 @@ fieldset:disabled a.btn {
   white-space: nowrap;
   width: 100%;
 }
+
+.dropdown-item-danger {
+  transition-duration: 0.3s;
+  transition-property: background-color, color;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  background: #f44336;
+  border: 0;
+  clear: both;
+  color: rgba(254, 244, 244, 0.87);
+  display: block;
+  font-weight: inherit;
+  padding: 0.75rem 1rem;
+  position: relative;
+  text-align: inherit;
+  -webkit-transform-origin: 0 0;
+  transform-origin: 0 0;
+  white-space: nowrap;
+  width: 100%;
+}
+
 
 @media (min-width: 576px) {
   .dropdown-item {
@@ -14363,4 +14384,5 @@ a.text-light:active, a.text-light:focus, a.text-light:hover {
     color: inherit;
   }
 }
+
 /*# sourceMappingURL=material.css.map */
