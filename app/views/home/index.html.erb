@@ -1,9 +1,18 @@
 <br>
+<h1>HOME
 
-<h1>HOME</h1>
+<div class="showbox">
+  <div class="loader">
+    <svg class="circular" viewBox="25 25 50 50">
+      <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="4" stroke-miterlimit="10"/>
+    </svg>
+  </div>
+</div>
+</h1>
+<br>
 
-<br>
-<br>
+
+
 
 <%# Navbar%>
 <div class="row">
@@ -19,16 +28,20 @@
 <div class="col-10">
   <div class="tab-content" id="v-pills-tabContent">
     <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
-      <table>
-        <tr>
-          <th>First Name &nbsp; &nbsp; &nbsp;</th>
-          <th>Last Name</th>
-          <th>Email</th>
-          <th>Can Login? </th>
-          <th>is backup </th>
-          <th>provider </th>
-        </tr>
-        <% @users.each do |user| %>
+      <h2>Users</h3>
+      <br>
+      <table class="d-flex p2 table">
+          <tr class="thead-dark">
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">E-Mail</th>
+            <th scope="col">Can Login?</th>
+            <th scope="col">Backup Mailbox?</th>
+            <th scope="col">IMAP Provider</th>
+            <th scope="col">Options</th>
+          </tr>
+
+          <% @users.each do |user| %>
           <tr>
             <td><%= user.first_name %></td>
             <td><%= user.last_name %></td>
@@ -36,17 +49,31 @@
             <td><%= user.can_login %></td>
             <td><%= user.is_backup %></td>
             <td><%= user.provider %></td>
-            <td><%= link_to 'Edit', edit_user_path(user) %></td>
 
+            <td>
+            <div class="dropdown">
+              <a class="btn btn-info dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Actions
+              </a>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="<%=user_path(user)%>">View More</a>
+                <a class="dropdown-item" href="<%=edit_user_path(user)%>">Edit</a>
+                <a class="dropdown-item-danger" href="" onclick='set_userID(<%=user.id%>, "<%=user.first_name%>", "<%=user.last_name%>");' data-toggle="modal" data-target="#delete-modal" >Delete</a>
 
+              </div>
+            </div>
+            </td>
           </tr>
         <% end %>
+        </tbody>
       </table>
 
-      <h3>Providers</h3>
-
-      <table>
-        <tr>
+      <br>
+      <br>
+      <h2>Providers</h3>
+      <br>
+      <table class="d-flex p2 table">
+        <tr class="thead-dark">
           <th>Name &nbsp; &nbsp; &nbsp;</th>
           <th>Server</th>
           <th>Port</th>
@@ -95,29 +122,19 @@
           </div>
         </div>
       </div>
-
-
-
-      <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown button
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
+      <br>
+      <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <% i = 1%>
+        <% ImapProvider.all.each do |provider| %>
+        <br>
+          <label class="btn btn-secondary active">
+            <%= form.radio_button :provider, i%> <%= provider.name%>
+          </label>
+          <% i = i + 1%>
+        <%end%>
       </div>
-
-
-        <div class='dropdown'>
-          <%= form.collection_select(:provider, ImapProvider.all, class:'btn btn-secondary dropdown-toggle', type:'button', id:'dropdownMenuButton', data-toggle:'dropdown', aria-haspopup:'true' aria-expanded:'false') %>
-        </div>
-
-
-
-
-
+      <br>
+      <br>
       <div class='form-check'>
         <%= form.check_box :can_login, class:'form-check-input', id:'can_login'%>
         <label for="can_login">Can this user login?</label>
@@ -131,6 +148,8 @@
       <%= form.submit "Submit", class:'btn btn-primary' %>
     <% end %>
   </div>
+
+
 
 
 
@@ -170,6 +189,70 @@
     <p>You are running module imap-backup version <%= @imap_backup_version %></p>
     <%= link_to 'Start Manual Backup!', start_backup_path, method: :post %>
 
+
+
+
+
+  </div>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">WAIT!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete <span style="font-weight:bold;" id="first-name"></span> <span style="font-weight:bold;" id="last-name"></span>?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-dismiss="modal">No!</button>
+        <a class="btn btn-danger" id="confirm-delete-btn" href="#" data-method="delete">Yes, Delete</a>
+      </div>
+    </div>
   </div>
 </div>
 
+
+
+
+
+
+
+
+<script>
+  var userToDelete
+  var userToDeleteFirstName
+  var userToDeleteLastName
+  function set_userID(userID, userFirstName, userLastName) {
+    console.log(userID);
+    userToDeleteFirstName = userFirstName;
+    userToDeleteLastName = userLastName;
+    document.getElementById("first-name").innerHTML=userFirstName;
+    document.getElementById("last-name").innerHTML=userLastName;
+
+    var usersURL = "/users/";
+    userToDelete = usersURL.concat(userID);
+    document.getElementById('confirm-delete-btn').href = userToDelete;
+  }
+</script>
